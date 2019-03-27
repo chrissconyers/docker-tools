@@ -12,6 +12,7 @@ services:
     environment:
       - HOME=/home/$USER
       - PIPENV_SHELL=/bin/bash
+      - PIPENV_VENV_IN_PROJECT=true
     user: "$PUID:$PGID"
     working_dir: $WORKING_DIR
     tty: true
