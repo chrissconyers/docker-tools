@@ -13,7 +13,7 @@ services:
       - HOME=/home/$USER
       - PIPENV_SHELL=/bin/bash
     user: "$PUID:$PGID"
-    working_dir: $PWD
+    working_dir: $WORKING_DIR
     tty: true
     stdin_open: true
 
