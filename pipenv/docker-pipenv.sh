@@ -11,5 +11,5 @@ if [[ -n $1 ]] && [[ $1 == '-X' ]]; then
 fi
 
 cd "$(dirname "$(readlink -f "$0")")"
-docker-compose run $X_FORWARD pipenv pipenv "$@"
+docker-compose run --rm $X_FORWARD pipenv pipenv "$@"
 
