@@ -1,0 +1,19 @@
+
+version: '3.7'
+services:
+  pipenv:
+    build:
+      dockerfile: Dockerfile.pipenv
+      context: .
+    image: pipenv
+    container_name: pipenv
+    volumes:
+      - /home/$USER:/home/$USER
+    environment:
+      - HOME=/home/$USER
+      - PIPENV_SHELL=/bin/bash
+    user: "$PUID:$PGID"
+    working_dir: $PWD
+    tty: true
+    stdin_open: true
+
