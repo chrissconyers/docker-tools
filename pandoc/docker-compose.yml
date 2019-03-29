@@ -1,0 +1,14 @@
+
+version: '3.7'
+services:
+  pandoc:
+    build:
+      dockerfile: Dockerfile.pandoc
+      context: .
+    image: pandoc
+    container_name: pandoc
+    volumes:
+      - /home/$USER:/home/$USER
+    user: "$PUID:$PGID"
+    working_dir: $WORKING_DIR
+
