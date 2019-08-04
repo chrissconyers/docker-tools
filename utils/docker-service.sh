@@ -15,6 +15,8 @@ main ()
       stop_compose
     elif [ $command == "restart" ]; then
       stop_compose && start_compose
+    elif [ $command == "update" ]; then
+      update
     fi
   else
     if [ $command == "start" ]; then
@@ -23,6 +25,8 @@ main ()
       stop_swarm
     elif [ $command == "restart" ]; then
       stop_swarm && start_swarm
+    elif [ $command == "update" ]; then
+      update
     fi
   fi
 
@@ -49,6 +53,12 @@ start_swarm()
 stop_swarm()
 {
   docker stack rm $stack_name
+}
+
+update()
+{
+  cd $compose_dir
+  docker-compose pull
 }
 
 parse_args()
@@ -87,8 +97,8 @@ parse_args()
 
   if [[ -z $1 ]]; then
     command="start"
-  elif [ "$1" != "start" ] && [ "$1" != "stop" ] && [ "$1" != "restart" ]; then
-    echo "must use one of the following commands: start, stop, restart"
+  elif [ "$1" != "start" ] && [ "$1" != "stop" ] && [ "$1" != "restart" ] && [ "$1" != "update" ]; then
+    echo "must use one of the following commands: start, stop, restart, update"
     exit
   else
     command=$1
@@ -123,6 +133,8 @@ Command:
   ${bold}stop${normal}:    stop and remove the docker service
 
   ${bold}restart${normal}: equivalent to stopping and starting a service
+
+  ${bold}update${normal}:  pull the latest docker images for all services
 
 Options:
   -f=<file>   path to the docker-compose.yml file that defines the service(s) to start
